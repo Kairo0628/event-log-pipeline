@@ -1,5 +1,5 @@
-import event
-import db
+import event as event
+import db as db
 
 if __name__ == '__main__':
     user = event.create_user()

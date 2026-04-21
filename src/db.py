@@ -31,7 +31,7 @@ def create_table_not_exist():
             session TEXT,
             event_type TEXT,
             event_timestamp TIMESTAMP
-        );
+        )
     """)
     conn.commit()
 
