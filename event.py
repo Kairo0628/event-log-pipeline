@@ -37,7 +37,7 @@ def _product_event(
     product_id = random.randint(1, 10)
     event = {
         'id': user_id, 'user': user, 'user_agent': user_agent, 'ip': ip, 'url': url + f'/product/{product_id}',
-            'session': session, 'event_type': 'product', 'timestamp': timestamp
+            'session': session, 'event_type': 'product_view', 'timestamp': timestamp
     }
     all_event.append(event)
     timestamp += random.randint(60, 300)
