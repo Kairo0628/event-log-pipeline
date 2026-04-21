@@ -2,8 +2,6 @@ from faker import Faker
 import random
 from datetime import datetime
 
-import json
-
 Faker.seed(42)
 random.seed(42)
 
@@ -133,14 +131,8 @@ def create_event(user_dict):
                             ip,
                             url,
                             session,
-                            all_event           
+                            all_event
                         )
             rand_val = random.random()
 
     return all_event
-
-user = create_user()
-event = create_event(user)
-
-with open('event.json', 'w') as f:
-    json.dump(event, f, indent = 4)
