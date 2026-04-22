@@ -1,14 +1,16 @@
 import psycopg2
+import os
 import io, csv
 from user_agents import parse
 from datetime import datetime
 
 def get_conn():
     conn = psycopg2.connect(
-        host = 'localhost',
-        dbname = 'events',
-        user = 'admin',
-        password = 'admin',
+        host = os.getenv('DB_HOST', 'postgres'),
+        port = os.getenv('DB_PORT', 5432),
+        dbname = os.getenv('DB_NAME', 'events'),
+        user = os.getenv('DB_USER', 'admin'),
+        password = os.getenv('DB_PASSWORD', 'admin')
     )
 
     return conn

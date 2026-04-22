@@ -1,0 +1,3 @@
+Faker==40.15.0
+psycopg2==2.9.12
+user-agents==2.2.0
