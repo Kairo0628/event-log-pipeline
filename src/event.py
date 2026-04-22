@@ -14,7 +14,7 @@ def create_user():
             'ip': [fake.ipv4() for _ in range(100)]}
 
 def _event_hour(n):
-    if n < 0.6:
+    if n < 0.65:
         hour = random.choice([8, 9, 17, 18, 19, 20, 21, 22, 23, 0, 1])
     elif n < 0.9:
         hour = random.choice([10, 11, 12, 13, 14, 15, 16])
@@ -37,7 +37,7 @@ def _product_event(
     product_id = random.randint(1, 10)
     event = {
         'id': user_id, 'user': user, 'user_agent': user_agent, 'ip': ip, 'url': url + f'/product/{product_id}',
-            'session': session, 'event_type': 'product_view', 'timestamp': timestamp
+            'session': session, 'event_type': 'click', 'timestamp': timestamp
     }
     all_event.append(event)
     timestamp += random.randint(60, 300)
@@ -95,7 +95,7 @@ def create_event(user_dict):
         if rand_val < 0.75:
             event = {
                 'id': user_id, 'user': user, 'user_agent': user_agent, 'ip': ip, 'url': url,
-                 'session': session, 'event_type': 'view', 'timestamp': timestamp
+                 'session': session, 'event_type': 'main', 'timestamp': timestamp
             }
             all_event.append(event)
             timestamp += random.randint(30, 300)
@@ -105,7 +105,7 @@ def create_event(user_dict):
             if rand_product < 0.75:
                 event = {
                 'id': user_id, 'user': user, 'user_agent': user_agent, 'ip': ip, 'url': url,
-                 'session': session, 'event_type': 'click', 'timestamp': timestamp
+                 'session': session, 'event_type': 'main_product', 'timestamp': timestamp
                 }
                 all_event.append(event)
                 timestamp += random.randint(30, 300)
@@ -115,7 +115,7 @@ def create_event(user_dict):
         else:
             event = {
                 'id': user_id, 'user': user, 'user_agent': user_agent, 'ip': ip, 'url': url + '/product',
-                 'session': session, 'event_type': 'view', 'timestamp': timestamp
+                 'session': session, 'event_type': 'product', 'timestamp': timestamp
             }
             all_event.append(event)
             timestamp += random.randint(30, 300)
