@@ -6,6 +6,7 @@
 - 로컬에서 코드를 실행하기 위해서는 세 개의 라이브러리 설치가 필요합니다. `pip install Faker psycopg2-binary user-agents` 또는 `pip install -r requirements.txt`
 - 이벤트 생성 -> DB 적재 파이프라인은 `python src/event_pipeline.py` 명령어로 개별 실행할 수 있습니다.
 - 분석 테이블은 `sql/` 하위 파일을 순서대로 실행하여 생성할 수 있습니다.
+- Admier(`localhost:8080`)에 접속하면 웹을 통해 DB를 조작할 수 있습니다.
 - metabase BI 도구를 사용하기 위해서는 **docker-compose.yaml** 파일의 주석을 모두 해제하고 다시 도커를 실행해야 합니다.
 
 ## 이벤트 생성기
