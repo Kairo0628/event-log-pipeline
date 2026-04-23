@@ -8,12 +8,20 @@ random.seed(42)
 fake = Faker('ko_KR')
 
 def create_user():
+    """
+    유저를 100명 생성합니다.
+    각 유저는 동일한 아이디, 이름, 유저 에이전트, IP 값을 가집니다.
+    """
     return {'id': [i for i in range(1, 101)],
             'user': [fake.user_name() for _ in range(100)],
             'user_agent': [fake.user_agent() for _ in range(100)],
             'ip': [fake.ipv4() for _ in range(100)]}
 
 def _event_hour(n):
+    """
+    일반적인 사람들의 패턴에 맞춰
+    출퇴근 시간, 저녁 시간에 많은 비율로 데이터가 생성되도록 합니다.
+    """
     if n < 0.65:
         hour = random.choice([8, 9, 17, 18, 19, 20, 21, 22, 23, 0, 1])
     elif n < 0.9:
@@ -34,6 +42,11 @@ def _product_event(
     session,
     all_event
 ):
+    """
+    상품 클릭 이벤트를 생성합니다. 상품은 1 ~ 10번 상품까지 있다고 가정합니다.
+    상품을 클릭하여도 구매 버튼을 누르지 않을 수도 있습니다.
+    구매 버튼을 누른 사용자는 구매 성공, 실패, 취소 세 개의 이벤트가 추가 생성됩니다.
+    """
     product_id = random.randint(1, 10)
     event = {
         'id': user_id, 'user': user, 'user_agent': user_agent, 'ip': ip, 'url': url + f'/product/{product_id}',
@@ -70,6 +83,14 @@ def _product_event(
     return timestamp
 
 def create_event(user_dict):
+    """
+    웹 방문 -> 상품 클릭 -> 상품 결제 -> 결제 완료 과정의 이벤트를 생성합니다.
+    이벤트는 최소 100_000개를 생성합니다.
+    최초 방문 경로는 메인 페이지/광고 페이지를 통한 접속 두 가지가 있습니다.
+    상품은 여러개를 클릭하고 구매할 수 있도록 반복문을 설정하였습니다.
+    또한 각 이벤트마다 확률을 설정하여 이벤트가 생성되지 않을 수도 있습니다.
+    이벤트는 타임스탬프 값을 늘리는 방식을 사용하여 시간의 흐름에 따라 진행됩니다.
+    """
     url = 'mysite.co.kr'
     all_event = []
 
